@@ -1,0 +1,30 @@
+name: Train and Export Models
+
+on:
+  push:
+    paths:
+      - "improved_disease_dataset.csv"
+      - "generate_and_save_models.py"
+      - ".github/workflows/train-models.yml"
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run model training script
+        run: python generate_and_save_models.py
+      - name: Commit model artifacts
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add models/
+          git commit -m 'Update trained models and artifacts' || echo "No changes to commit"
+          git push
