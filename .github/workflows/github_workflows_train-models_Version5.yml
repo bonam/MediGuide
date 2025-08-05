@@ -10,7 +10,7 @@ on:
 
 jobs:
   train:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -21,10 +21,4 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run model training script
         run: python generate_and_save_models.py
-      - name: Commit model artifacts
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add models/
-          git commit -m 'Update trained models and artifacts' || echo "No changes to commit"
-          git push
+      
