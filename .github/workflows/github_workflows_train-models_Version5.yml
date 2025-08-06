@@ -41,4 +41,12 @@ jobs:
         with:
           name: pkls
           path: ./downloaded_pkls
-      
+      - name: Build Docker image for FastAPI
+        run: docker build -t fastapi-app .
+      - name: Run FastAPI container
+        run: |
+          docker run -d \
+            -v ${{ github.workspace }}/downloaded_pkls:/app/models \
+            -p 8000:8000 \
+            --name fastapi-app-container \
+            fastapi-app
