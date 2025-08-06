@@ -21,4 +21,19 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run model training script
         run: python generate_and_save_models.py
+      - name: Upload PKL files
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkls
+          path: path/to/your/*.pkl
+
+  use_pkls:
+    needs: train
+    runs-on: self-hosted
+    steps:
+      - name: Download PKL files
+        uses: actions/download-artifact@v4
+        with:
+          name: pkls
+          path: ./downloaded_pkls
       
