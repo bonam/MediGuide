@@ -33,11 +33,6 @@ jobs:
     steps:
       - name: Download PKL files
         uses: actions/download-artifact@v4
-      - name: Build Docker image for FastAPI
-        run: docker build -t fastapi-app
-      - name: Run FastAPI Docker container
-        run: docker run -d -p 8000:8000 --name fastapi-app-test fastapi-app
-      - name: Check FastAPI container health
         with:
           name: pkls
           path: ./downloaded_pkls
