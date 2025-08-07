@@ -80,8 +80,7 @@ jobs:
           
       - name: Download unzip (no sudo)
         run: |
-          curl -L -o unzip.tar.gz https://github.com/pmachapman/unzip-static-binaries/releases/download/v6.0/unzip-6.0-Linux-x86_64.tar.gz
-          tar -xzf unzip.tar.gz
+          curl -L -o unzip https://github.com/pmachapman/unzip-static-binaries/releases/download/v6.0/unzip-6.0-Linux-x86_64
           chmod +x unzip
           echo "$PWD" >> $GITHUB_PATH
 
