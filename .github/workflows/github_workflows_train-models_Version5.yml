@@ -80,6 +80,21 @@ jobs:
 
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
+        
+      - name: Download unzip (no sudo)
+        run: |
+          curl -L -o unzip.tar.gz https://github.com/pmachapman/unzip-static-binaries/releases/download/v6.0/unzip-6.0-Linux-x86_64.tar.gz
+          tar -xzf unzip.tar.gz
+          chmod +x unzip
+          echo "$PWD" >> $GITHUB_PATH
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+         with:
+           cmdline-tools-version: 12266719
+           accept-android-sdk-licenses: true
+           log-accepted-android-sdk-licenses: true
+           packages: tools platform-tools
 
       # Now you can build the APK
       - name: Install dependencies
