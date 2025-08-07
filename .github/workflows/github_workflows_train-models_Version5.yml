@@ -13,18 +13,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: Run model training script
         run: python generate_and_save_models.py
-
       - name: Upload PKL files
         uses: actions/upload-artifact@v4
         with:
@@ -40,14 +36,8 @@ jobs:
         with:
           name: pkls
           path: ./downloaded_pkls
-
       - name: Build Docker image for FastAPI
         run: docker build -t fastapi-app .
-
-      - name: Stop and remove old container if exists
-        run: |
-          docker rm -f fastapi-app-container || true
-
       - name: Run FastAPI container
         run: |
           docker run -d \
@@ -55,3 +45,28 @@ jobs:
             -p 8000:8000 \
             --name fastapi-app-container \
             fastapi-app
+
+  build_flutter_linux:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Enable Linux desktop
+        run: flutter config --enable-linux-desktop
+
+      - name: Build Linux app
+        run: flutter build linux
+
+      - name: Upload Flutter Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-linux-app
+          path: build/linux/x64/release/bundle/
