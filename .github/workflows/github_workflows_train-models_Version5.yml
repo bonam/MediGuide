@@ -92,10 +92,10 @@ jobs:
         working-directory: app
 
 
-      - name: Build IPA (unsigned)
+      - name: Build IPA (no codesign, recent Flutter)
         run: |
-          cd app 
-          flutter build ipa --no-codesign
+         cd app
+         flutter build ipa
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
