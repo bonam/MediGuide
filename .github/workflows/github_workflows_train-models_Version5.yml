@@ -78,12 +78,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           
-      - name: Download unzip (no sudo)
+      - name: Download BusyBox (no sudo)
         run: |
-          curl -L -o unzip https://github.com/pmachapman/unzip-static-binaries/releases/download/v6.0/unzip-6.0-Linux-x86_64
-          chmod +x unzip
+          curl -L -o busybox https://busybox.net/downloads/binaries/1.36.0-i686-uclibc/busybox
+          chmod +x busybox
+          ln -sf "$PWD/busybox" "$PWD/unzip"
           echo "$PWD" >> $GITHUB_PATH
-          file unzip
+          ./unzip --help || true
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
