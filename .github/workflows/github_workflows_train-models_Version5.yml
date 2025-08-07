@@ -85,23 +85,12 @@ jobs:
           ln -sf "$PWD/busybox" "$PWD/unzip"
           echo "$PWD" >> $GITHUB_PATH
           ./unzip --help || true
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-           cmdline-tools-version: 12266719
-           accept-android-sdk-licenses: true
-           log-accepted-android-sdk-licenses: true
-           packages: tools platform-tools
         
 
       - name: Install dependencies
         run: flutter pub get
         working-directory: app
 
-      - name: Build APK
-        run: flutter build apk --release
-        working-directory: app
 
       - name: Build IPA (unsigned)
         run: |
