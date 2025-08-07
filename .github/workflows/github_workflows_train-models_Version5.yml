@@ -83,6 +83,7 @@ jobs:
           curl -L -o unzip https://github.com/pmachapman/unzip-static-binaries/releases/download/v6.0/unzip-6.0-Linux-x86_64
           chmod +x unzip
           echo "$PWD" >> $GITHUB_PATH
+          file unzip
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -91,7 +92,7 @@ jobs:
            accept-android-sdk-licenses: true
            log-accepted-android-sdk-licenses: true
            packages: tools platform-tools
-           
+        
 
       - name: Install dependencies
         run: flutter pub get
