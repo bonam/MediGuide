@@ -78,7 +78,7 @@ jobs:
           flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk
 
       - name: Build IPA (unsigned)
         run: flutter build ipa --no-codesign
