@@ -90,13 +90,12 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-         with:
+        with:
            cmdline-tools-version: 12266719
            accept-android-sdk-licenses: true
            log-accepted-android-sdk-licenses: true
            packages: tools platform-tools
 
-      # Now you can build the APK
       - name: Install dependencies
         run: flutter pub get
         working-directory: app
