@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  train:
+  Build Models:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
