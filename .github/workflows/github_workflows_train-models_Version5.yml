@@ -31,7 +31,7 @@ jobs:
           name: pkls
           path: models/*.pkl
 
-  use_pkls:
+  Build/Run FastAPI:
     needs: train
     runs-on: self-hosted
     steps:
